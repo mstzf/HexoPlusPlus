@@ -1387,6 +1387,34 @@ login();
         }
         )
       }
+      if (path == "/hpp/api/gettalk") {
+          const hpp_talk = await JSON.parse(await KVNAME.get("hpp_talk_data"));
+          const result={
+                code:200,
+                data:[],
+                msg:"成功"
+          }
+
+          for (var i = getJsonLength(hpp_talk) - 1; i > 0; i--) {
+            const data={
+              date:'',
+              content:'',
+              from:''
+            }
+                data.date=hpp_talk[i].time
+                data.content=hpp_talk[i].content
+                data.from="Mango"
+            if (JSON.stringify(data) != "{}") {
+              result.data.push(data)
+            }
+          }
+          return new Response(JSON.stringify(result), {
+            headers: {
+              "content-type": "application/json;charset=UTF-8",
+              "Access-Control-Allow-Origin": "*"
+            }
+          })
+      }
       if (path == "/hpp/api/gethpptalk") {
         const req_r = await request.text()
         if (req_r != "") {
