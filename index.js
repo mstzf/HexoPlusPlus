@@ -66,112 +66,112 @@ async function handleRequest(request) {
             await KVNAME.put("hpp_config", config_r)
             return new Response("OK")
           } else {
-
+            // 当无配置文件时创建配置文件
             let hpp_installhtml = `<!doctype html>
-<html lang="zh">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-	<title>${hpp_ver}安装</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/install.css">
-</head>
-<body>
-		<div class="cont_principal">
-			
-		  <div class="cont_join  ">
-		    <div class="cont_letras">
-		      <p>Hexo</p>
-		      <p>Plus</p>
-		      <p>plus</p>
-		    </div>
+            <html lang="zh">
+            <head>
+              <meta charset="UTF-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+              <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+              <title>${hpp_ver}安装</title>
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/install.css">
+            </head>
+            <body>
+                <div class="cont_principal">
+                  
+                  <div class="cont_join  ">
+                    <div class="cont_letras">
+                      <p>Hexo</p>
+                      <p>Plus</p>
+                      <p>plus</p>
+                    </div>
 
-		    <div class="cont_form_join" style="overflow-x: auto;">
-		      <h2>安装信息</h2>
-			  <h3 style="color:#fff">基本信息</h3>
-		      <p>域名:</p>    
-		      <input type="text" class="input_text" id="hpp_domain" placeholder="xxx.xxx.com"/>
-		      <p>头像地址:</p>    
-		      <input type="text" class="input_text" id="hpp_userimage" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/CDN/img/avatar.png"/>
-		      <p>标题:</p>    
-		      <input type="text" class="input_text" id="hpp_title" placeholder="XXX的后台"/>
-		      <p>icon地址:</p>    
-		      <input type="text" class="input_text" id="hpp_usericon" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/chenyfan.github.io/favicon.ico"/>
-		      <p>跨域请求:</p>    
-			  <input type="text" class="input_text" id="hpp_cors" placeholder="*"/>
-			  <h3 style="color:#fff">面板配置</h3>
-			  <p>OwOJSON地址:</p>    
-              <input type="text" class="input_text" id="hpp_OwO" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/CDN@ca3ea6c/assets/list.json" />
-			  <p>面板背景图片:</p>    
-              <input type="text" class="input_text" id="hpp_back" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan-Tester/DailyGet@gh-pages/bingpic/bing.jpg" />
-			  <p>懒加载图片:</p>    
-              <input type="text" class="input_text" id="hpp_lazy_img" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/blog@master/themes/fluid/source/img/loading.gif" />
-			  <p>高亮样式:</p>    
-              <input type="text" class="input_text" id="hpp_highlight_style" placeholder="github" />
-			  
-			  <p>面板选项卡颜色:</p>    
-              <input type="text" class="input_text" id="hpp_color" placeholder="azure" />
-			  <p>面板选项框颜色:</p>    
-              <input type="text" class="input_text" id="hpp_bg_color" placeholder="black" />
-			  <p>面板主题色:</p>    
-              <input type="text" class="input_text" id="hpp_theme_mode" placeholder="light" />
-			  
-			  <p>列表限制数量:</p>    
-              <input type="text" class="input_text" id="hpp_page_limit" placeholder="10" />
-			  
-			  <h3 style="color:#fff">Github信息</h3>
-		      <p>Github文档仓库Token:</p>    
-		      <input type="text" class="input_text" id="hpp_githubdoctoken" placeholder="*********"/>
-			  <p>Github图片仓库Token:</p>    
-		      <input type="text" class="input_text" id="hpp_githubimagetoken" placeholder="*********"/>
-			  <p>Github文档仓库用户名:</p>    
-		      <input type="text" class="input_text" id="hpp_githubdocusername" placeholder="XXX" />
-			  <p>Github图片仓库用户名:</p>    
-		      <input type="text" class="input_text" id="hpp_githubimageusername" placeholder="XXX" />
-			  <p>Github文档仓库名:</p>    
-		      <input type="text" class="input_text" id="hpp_githubdocrepo" placeholder="blog" />
-			  <p>Github图片仓库名:</p>    
-		      <input type="text" class="input_text" id="hpp_githubimagerepo" placeholder="image" />
-			  <p>Github文档仓库根目录:</p>    
-		      <input type="text" class="input_text" id="hpp_githubdocroot" placeholder="/" />
-			  <p>Github图片仓库路径:</p>    
-		      <input type="text" class="input_text" id="hpp_githubimagepath" placeholder="/" />
-			  <p>Github文档仓库分支:</p>    
-		      <input type="text" class="input_text" id="hpp_githubdocbranch" placeholder="master" />
-			  <p>Github图片仓库分支:</p>    
-		      <input type="text" class="input_text" id="hpp_githubimagebranch" placeholder="main" />
-			  <h3 style="color:#fff">附加功能</h3>
-			  <p>是否自动签到【是为True，否为False】:</p>    
-		      <input type="text" class="input_text" id="hpp_autodate" placeholder="False" />
-              <h3 style="color:#fff">CloudFlare访问功能</h3>
-			  <p>Global API Key:</p>    
-		      <input type="text" class="input_text" id="hpp_CF_Auth_Key" placeholder="***" />
-              <p>目标Workers名称:</p>    
-		      <input type="text" class="input_text" id="hpp_script_name" placeholder="HexoPlusPlus" />
-              <p>Workers账户ID:</p>    
-		      <input type="text" class="input_text" id="hpp_account_identifier" placeholder="***" />
-              <p>账户登录邮箱:</p>    
-		      <input type="text" class="input_text" id="hpp_Auth_Email" placeholder="ABC@DEF.com" />
-              <h3 style="color:#fff">Twikoo加强</h3>
-              <p>Twikoo环境ID:</p>    
-              <input type="text" class="input_text" id="hpp_twikoo_envId" placeholder="xxx" />
-			  
-		    </div>
-		  
-		    <div class="cont_join_form_finish" style="display:none">
-		      <h2>完成</h2>  
-		    </div>
+                    <div class="cont_form_join" style="overflow-x: auto;">
+                      <h2>安装信息</h2>
+                    <h3 style="color:#fff">基本信息</h3>
+                      <p>域名:</p>    
+                      <input type="text" class="input_text" id="hpp_domain" placeholder="xxx.xxx.com"/>
+                      <p>头像地址:</p>    
+                      <input type="text" class="input_text" id="hpp_userimage" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/CDN/img/avatar.png"/>
+                      <p>标题:</p>    
+                      <input type="text" class="input_text" id="hpp_title" placeholder="XXX的后台"/>
+                      <p>icon地址:</p>    
+                      <input type="text" class="input_text" id="hpp_usericon" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/chenyfan.github.io/favicon.ico"/>
+                      <p>跨域请求:</p>    
+                    <input type="text" class="input_text" id="hpp_cors" placeholder="*"/>
+                    <h3 style="color:#fff">面板配置</h3>
+                    <p>OwOJSON地址:</p>    
+                          <input type="text" class="input_text" id="hpp_OwO" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/CDN@ca3ea6c/assets/list.json" />
+                    <p>面板背景图片:</p>    
+                          <input type="text" class="input_text" id="hpp_back" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan-Tester/DailyGet@gh-pages/bingpic/bing.jpg" />
+                    <p>懒加载图片:</p>    
+                          <input type="text" class="input_text" id="hpp_lazy_img" placeholder="https://cdn.jsdelivr.net/gh/ChenYFan/blog@master/themes/fluid/source/img/loading.gif" />
+                    <p>高亮样式:</p>    
+                          <input type="text" class="input_text" id="hpp_highlight_style" placeholder="github" />
+                    
+                    <p>面板选项卡颜色:</p>    
+                          <input type="text" class="input_text" id="hpp_color" placeholder="azure" />
+                    <p>面板选项框颜色:</p>    
+                          <input type="text" class="input_text" id="hpp_bg_color" placeholder="black" />
+                    <p>面板主题色:</p>    
+                          <input type="text" class="input_text" id="hpp_theme_mode" placeholder="light" />
+                    
+                    <p>列表限制数量:</p>    
+                          <input type="text" class="input_text" id="hpp_page_limit" placeholder="10" />
+                    
+                    <h3 style="color:#fff">Github信息</h3>
+                      <p>Github文档仓库Token:</p>    
+                      <input type="text" class="input_text" id="hpp_githubdoctoken" placeholder="*********"/>
+                    <p>Github图片仓库Token:</p>    
+                      <input type="text" class="input_text" id="hpp_githubimagetoken" placeholder="*********"/>
+                    <p>Github文档仓库用户名:</p>    
+                      <input type="text" class="input_text" id="hpp_githubdocusername" placeholder="XXX" />
+                    <p>Github图片仓库用户名:</p>    
+                      <input type="text" class="input_text" id="hpp_githubimageusername" placeholder="XXX" />
+                    <p>Github文档仓库名:</p>    
+                      <input type="text" class="input_text" id="hpp_githubdocrepo" placeholder="blog" />
+                    <p>Github图片仓库名:</p>    
+                      <input type="text" class="input_text" id="hpp_githubimagerepo" placeholder="image" />
+                    <p>Github文档仓库根目录:</p>    
+                      <input type="text" class="input_text" id="hpp_githubdocroot" placeholder="/" />
+                    <p>Github图片仓库路径:</p>    
+                      <input type="text" class="input_text" id="hpp_githubimagepath" placeholder="/" />
+                    <p>Github文档仓库分支:</p>    
+                      <input type="text" class="input_text" id="hpp_githubdocbranch" placeholder="master" />
+                    <p>Github图片仓库分支:</p>    
+                      <input type="text" class="input_text" id="hpp_githubimagebranch" placeholder="main" />
+                    <h3 style="color:#fff">附加功能</h3>
+                    <p>是否自动签到【是为True，否为False】:</p>    
+                      <input type="text" class="input_text" id="hpp_autodate" placeholder="False" />
+                          <h3 style="color:#fff">CloudFlare访问功能</h3>
+                    <p>Global API Key:</p>    
+                      <input type="text" class="input_text" id="hpp_CF_Auth_Key" placeholder="***" />
+                          <p>目标Workers名称:</p>    
+                      <input type="text" class="input_text" id="hpp_script_name" placeholder="HexoPlusPlus" />
+                          <p>Workers账户ID:</p>    
+                      <input type="text" class="input_text" id="hpp_account_identifier" placeholder="***" />
+                          <p>账户登录邮箱:</p>    
+                      <input type="text" class="input_text" id="hpp_Auth_Email" placeholder="ABC@DEF.com" />
+                          <h3 style="color:#fff">Twikoo加强</h3>
+                          <p>Twikoo环境ID:</p>    
+                          <input type="text" class="input_text" id="hpp_twikoo_envId" placeholder="xxx" />
+                    
+                    </div>
+                  
+                    <div class="cont_join_form_finish" style="display:none">
+                      <h2>完成</h2>  
+                    </div>
 
-		    <div class="cont_btn_join">
-		      <a href="#" onclick='start()' id="butttt">开始配置</a>
-		    </div>
-		  </div>
-		</div>
-	</div>
-	
-	<script src="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/install.js"></script>
-</body>
-</html>`
+                    <div class="cont_btn_join">
+                      <a href="#" onclick='start()' id="butttt">开始配置</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <script src="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/install.js"></script>
+            </body>
+            </html>`
             return new Response(hpp_installhtml, {
               headers: { "content-type": "text/html;charset=UTF-8" }
             })
@@ -211,10 +211,11 @@ async function handleRequest(request) {
           const githubdocdraftpath = encodeURI(hpp_githubdocdraftpath)
           const githubdocpath = encodeURI(hpp_githubdocpath)
           const githubimagepath = encodeURI(hpp_githubimagepath)
-		  const hpp_color=config["hpp_color"]==undefined?"rose":config["hpp_color"]
-		  const hpp_bg_color=config["hpp_bg_color"]==undefined?"white":config["hpp_bg_color"]
-		  const hpp_theme_mode=config["hpp_theme_mode"]=="dark"?"dark":"light"
-		  const hpp_page_limit=config["hpp_page_limit"]==undefined?"10":config["hpp_page_limit"]
+          const hpp_color = config["hpp_color"] == undefined ? "rose" : config["hpp_color"]
+          const hpp_bg_color = config["hpp_bg_color"] == undefined ? "white" : config["hpp_bg_color"]
+          const hpp_theme_mode = config["hpp_theme_mode"] == "dark" ? "dark" : "light"
+          const hpp_page_limit = config["hpp_page_limit"] == undefined ? "10" : config["hpp_page_limit"]
+          // 自动签到
           if (hpp_autodate == "True") {
             const now = Date.now(new Date())
             await KVNAME.put("hpp_activetime", now)
@@ -243,9 +244,10 @@ async function handleRequest(request) {
             let hpp_talk_act = ""
             let hpp_docs_man_act = ""
             let hpp_img_man_act = ""
-			let hpp_tool_act = ""
+            let hpp_tool_act = ""
             let hpp_set_act = ""
             let hpp_js = ""
+            // 未指定路径时，返回页面
             let hpp_init = `<div class="content"><div class="container-fluid"><div class="row"><div class="col-md-12"><div class="card"><div class="card-header card-header-primary"><h4 class="card-title">404</h4><p class="card-category">我们不知道您的需求</p></div></br><div class="card-body"><a href="/hpp/admin/dash/home">回到主页</a></div></div></div></div></div></div>`
             if (path == "/hpp/admin/dash/home") {
               hpp_home_act = " active"
@@ -341,7 +343,7 @@ async function handleRequest(request) {
             </div>
 			
 			<div class="col-lg-6 col-md-6 col-sm-6">
-              <a href="https://github.com/HexoPlusPlus/HexoPlusPlus" target="_blank">
+              <a href="https://github.com/mstzf/HexoPlusPlus" target="_blank">
               <div class="card card-stats">
                 <div class="card-header card-header-primary card-header-icon">
                   <div class="card-icon">
@@ -361,6 +363,7 @@ async function handleRequest(request) {
       </div>`
               hpp_js = `<script src='https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/home.js'></script>`
             }
+            // 文章编辑界面
             if (path == "/hpp/admin/dash/edit") {
               hpp_edit_act = " active"
               hpp_init = `<div class="content">
@@ -418,35 +421,33 @@ async function handleRequest(request) {
             if (path == "/hpp/admin/dash/talk") {
               hpp_talk_act = " active"
               hpp_init = `<div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">说说</h4>
-                  <p class="card-category">Talk</p>
-                </div>
-              </br>
-                <div class="card-body">
-                          
-                        
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <label>书写</label>
-                              <div class="form-group" id="hpp_talk_editor"></div>
-                            </div>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-header card-header-primary">
+                            <h4 class="card-title">说说</h4>
+                            <p class="card-category">Talk</p>
                           </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary pull-right" onclick="javascript:hpp_upload_md()">Upload</button>
+                        </br>
+                          <div class="card-body">    
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <label>书写</label>
+                                        <div class="form-group" id="hpp_talk_editor"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <button type="submit" class="btn btn-primary pull-right" onclick="javascript:hpp_upload_md()">Upload</button>
                         <div class="clearfix"></div>
-						<input type="file" name="upload" id="upload_md" style="display:none"/>
-						<form id="upform" enctype='multipart/form-data' style="display:none;">
-    <div class="form-group">
-        <label for="upteainput">上传文件</label>
-        <input type="file" id="input">
-    </div>
-</form><div id="hpp_talk"></div>
+                      <input type="file" name="upload" id="upload_md" style="display:none"/>
+                      <form id="upform" enctype='multipart/form-data' style="display:none;">
+                  <div class="form-group">
+                    <label for="upteainput">上传文件</label>
+                    <input type="file" id="input">
+                  </div>
+                  </form><div id="hpp_talk"></div>
                 </div>
               </div>
             </div>
@@ -535,7 +536,7 @@ async function handleRequest(request) {
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-lazy@1.7.11/jquery.lazy.plugins.min.js"></script><script src="https://cdn.jsdelivr.net/gh/brutaldesign/swipebox/src/js/jquery.swipebox.min.js"></script>`
 
             }
-			if (path == "/hpp/admin/dash/tool") {
+            if (path == "/hpp/admin/dash/tool") {
               hpp_tool_act = " active"
               hpp_init = `<div class="content">
         <div class="container-fluid">
@@ -654,9 +655,9 @@ async function handleRequest(request) {
   const hpp_page_limit = ${hpp_page_limit}
   </script>
 </head>
-<body class="${hpp_theme_mode=='dark'?'dark-edition':''}">
+<body class="${hpp_theme_mode == 'dark' ? 'dark-edition' : ''}">
   <div class="wrapper ">
-    <div class="sidebar" data-color="${hpp_color}" data-background-color="${hpp_theme_mode=='dark'?'default':hpp_bg_color}" data-image="${hpp_back}">
+    <div class="sidebar" data-color="${hpp_color}" data-background-color="${hpp_theme_mode == 'dark' ? 'default' : hpp_bg_color}" data-image="${hpp_back}">
       <div class="logo"><a class="simple-text logo-normal">${hpp_title}</a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -756,20 +757,6 @@ ${hpp_js}
             return new Response(hpp_dash, {
               headers: { "content-type": "text/html;charset=UTF-8" }
             })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           }
           if (path.startsWith("/hpp/admin/api/adddoc/")) {
 
@@ -946,7 +933,7 @@ ${hpp_js}
             const filename = path.substr(("/hpp/admin/api/getdoc/").length)
             return (fetch(`https://raw.githubusercontent.com/${hpp_githubdocusername}/${hpp_githubdocrepo}/${hpp_githubdocbranch}${githubdocpath}${filename}?ref=${hpp_githubdocbranch}`, hpp_githubgetdocinit))
           }
-		  if (path == ("/hpp/admin/api/getscaffolds")) {
+          if (path == ("/hpp/admin/api/getscaffolds")) {
             return (fetch(`https://raw.githubusercontent.com/${hpp_githubdocusername}/${hpp_githubdocrepo}/${hpp_githubdocbranch}${hpp_githubdocroot}scaffolds/post.md?ref=${hpp_githubdocbranch}`, hpp_githubgetdocinit))
           }
           //他名字叫bfs，他就叫bfs/doge
@@ -1034,6 +1021,24 @@ ${hpp_js}
             hpp_talk.push(add);
             await KVNAME.put("hpp_talk_data", JSON.stringify(hpp_talk))
             await KVNAME.put("hpp_talk_id", hpp_talk_id)
+            return new Response('OK')
+          }
+          if (path == "/hpp/admin/api/updatetalk") {
+            let hpp_talk_re = await KVNAME.get("hpp_talk_data")
+            if (hpp_talk_re === null) { hpp_talk_re = "[]" }
+            let hpp_talk = await JSON.parse(hpp_talk_re);
+            const now = await request.json()
+            const add = {
+              id: hpp_talk_id,
+              content: now["content"],
+            }
+            for (const item in hpp_talk) {
+              if (item.id === add.id) {
+                item.content = add.content
+              }
+            }
+            await KVNAME.put("hpp_talk_data", JSON.stringify(hpp_talk))
+
             return new Response('OK')
           }
           if (path == "/hpp/admin/api/deltalk") {
@@ -1291,6 +1296,46 @@ login();
           return new Response('document.getElementById("bloggeractivetime").innerHTML=\'博主在' + Math.round(k / 3600) + '小时前活跃了一次\'', hpp_re_active_init)
         }
       }
+      if (path == "/hpp/api/addtalk") {
+        let hpp_talk_re = await KVNAME.get("hpp_talk_data")
+        if (hpp_talk_re === null) { hpp_talk_re = "[]" }
+        let hpp_talk = await JSON.parse(hpp_talk_re);
+        let hpp_talk_id_re = await KVNAME.get("hpp_talk_id")
+        if (hpp_talk_id_re === null) { hpp_talk_id_re = 0 }
+        let hpp_talk_id = hpp_talk_id_re;
+        hpp_talk_id++;
+        const now = await request.json()
+        const add = {
+          id: hpp_talk_id,
+          time: now["time"],
+          name: now["name"],
+          avatar: now["avatar"],
+          content: now["content"],
+          visible: "True"
+        }
+        hpp_talk.push(add);
+        await KVNAME.put("hpp_talk_data", JSON.stringify(hpp_talk))
+        await KVNAME.put("hpp_talk_id", hpp_talk_id)
+        return new Response('OK')
+      }
+      if (path == "/hpp/admin/api/updatetalk") {
+        let hpp_talk_re = await KVNAME.get("hpp_talk_data")
+        if (hpp_talk_re === null) { hpp_talk_re = "[]" }
+        let hpp_talk = await JSON.parse(hpp_talk_re);
+        const now = await request.json()
+        const add = {
+          id: hpp_talk_id,
+          content: now["content"],
+        }
+        for (const item in hpp_talk) {
+          if (item.id === add.id) {
+            item.content = add.content
+          }
+        }
+        await KVNAME.put("hpp_talk_data", JSON.stringify(hpp_talk))
+
+        return new Response('OK')
+      }
       if (path == "/hpp/api/captchaimg") {
         let url = "https://thispersondoesnotexist.com/image"
         let request = new Request(url);
@@ -1388,32 +1433,37 @@ login();
         )
       }
       if (path == "/hpp/api/gettalk") {
-          const hpp_talk = await JSON.parse(await KVNAME.get("hpp_talk_data"));
-          const result={
-                code:200,
-                data:[],
-                msg:"成功"
+        const hpp_talk = await JSON.parse(await KVNAME.get("hpp_talk_data"));
+        const result = {
+          code: 200,
+          data: [],
+          msg: "成功"
+        }
+        var hpp_vi = null;
+        for (var i = hpp_talk.length; i > -1; i--) {
+          const data = {
+            id: null,
+            date: '',
+            content: '',
+            from: ''
           }
-
-          for (var i = getJsonLength(hpp_talk) - 1; i > 0; i--) {
-            const data={
-              date:'',
-              content:'',
-              from:''
-            }
-                data.date=hpp_talk[i].time
-                data.content=hpp_talk[i].content
-                data.from="Mango"
-            if (JSON.stringify(data) != "{}") {
-              result.data.push(data)
-            }
+          try {
+            hpp_vi = hpp_talk[i]["visible"]
+            data.id = hpp_talk[i]["id"]
+            data.date = hpp_talk[i]["time"]
+            data.content = hpp_talk[i]["content"]
+            data.from = "Mango"
+          } catch (e) { hpp_vi = null }
+          if (JSON.stringify(data) != "{}"&& hpp_vi != "False") {
+            result.data.push(data)
           }
-          return new Response(JSON.stringify(result), {
-            headers: {
-              "content-type": "application/json;charset=UTF-8",
-              "Access-Control-Allow-Origin": "*"
-            }
-          })
+        }
+        return new Response(JSON.stringify(result), {
+          headers: {
+            "content-type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*"
+          }
+        })
       }
       if (path == "/hpp/api/gethpptalk") {
         const req_r = await request.text()
