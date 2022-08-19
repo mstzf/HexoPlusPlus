@@ -420,6 +420,7 @@ async function handleRequest(request) {
             }
             if (path == "/hpp/admin/dash/talk") {
               hpp_talk_act = " active"
+              // 说说页面
               hpp_init = `<div class="content">
                   <div class="container-fluid">
                     <div class="row">
@@ -1025,21 +1026,26 @@ ${hpp_js}
           }
           if (path == "/hpp/admin/api/updatetalk") {
             let hpp_talk_re = await KVNAME.get("hpp_talk_data")
-            if (hpp_talk_re === null) { hpp_talk_re = "[]" }
             let hpp_talk = await JSON.parse(hpp_talk_re);
             const now = await request.json()
-            const add = {
-              id: hpp_talk_id,
+            const temp = {
+              id: now["id"],
               content: now["content"],
             }
-            for (const item in hpp_talk) {
-              if (item.id === add.id) {
-                item.content = add.content
+            for(const i in hpp_talk){
+              if(hpp_talk[i].id===temp.id){
+                hpp_talk[i].content=temp.content
               }
             }
+    
             await KVNAME.put("hpp_talk_data", JSON.stringify(hpp_talk))
-
-            return new Response('OK')
+    
+            return new Response(200, {
+              headers: {
+                "content-type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*"
+              }
+            })
           }
           if (path == "/hpp/admin/api/deltalk") {
             const hpp_talk = JSON.parse(await KVNAME.get("hpp_talk_data"));
@@ -1318,24 +1324,7 @@ login();
         await KVNAME.put("hpp_talk_id", hpp_talk_id)
         return new Response('OK')
       }
-      if (path == "/hpp/admin/api/updatetalk") {
-        let hpp_talk_re = await KVNAME.get("hpp_talk_data")
-        if (hpp_talk_re === null) { hpp_talk_re = "[]" }
-        let hpp_talk = await JSON.parse(hpp_talk_re);
-        const now = await request.json()
-        const add = {
-          id: hpp_talk_id,
-          content: now["content"],
-        }
-        for (const item in hpp_talk) {
-          if (item.id === add.id) {
-            item.content = add.content
-          }
-        }
-        await KVNAME.put("hpp_talk_data", JSON.stringify(hpp_talk))
 
-        return new Response('OK')
-      }
       if (path == "/hpp/api/captchaimg") {
         let url = "https://thispersondoesnotexist.com/image"
         let request = new Request(url);
