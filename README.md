@@ -1,6 +1,6 @@
 # HexoPlusPlus
 ## 维护目的
-原作者已经停止维护支持，我对其再度更新维护的目的是想要用自带的说说功能
+原作者已经停止了维护，本人只能在力所能及的范围内对其更新
 
 ## A powerful Hexo dashboard
 
@@ -28,6 +28,7 @@ HexoPlusPlus~~也叫Hexo艹~~，是一个基于CloudFlareWorkers和CloudFlareKV�
 - [ ] Imgur图床+镜像支持
 - [ ] 7bu图床支持
 - [ ] i8n国际化
+- [ ] OSS图床
 
 ![](https://cdn.jsdelivr.net/gh/HexoPlusPlus/CDN@master/doc_img/b_1.png)
 
