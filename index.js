@@ -448,14 +448,15 @@ async function handleRequest(request) {
                     <label for="upteainput">上传文件</label>
                     <input type="file" id="input">
                   </div>
-                  </form><div id="hpp_talk"></div>
+                  </form>
+                  <div id="hpp_talk"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>`
-              hpp_js = `<link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/notyf/notyf.min.css' /> <script src="https://cdn.jsdelivr.net/npm/notyf/notyf.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/talk.css" /><script src='https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/talk.js'></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-lazy@1.7.11/jquery.lazy.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-lazy@1.7.11/jquery.lazy.plugins.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/OwO.min.css">`
+              hpp_js = `<link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/notyf/notyf.min.css' /> <script src="https://cdn.jsdelivr.net/npm/notyf/notyf.min.js"></script><link rel="stylesheet" href="https://pic.mstzf.cn/cdn/hpp/css/talk.css" /><script src='https://pic.mstzf.cn/cdn/hpp/js/talk.js'></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-lazy@1.7.11/jquery.lazy.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-lazy@1.7.11/jquery.lazy.plugins.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HexoPlusPlus/HexoPlusPlus@${hpp_CDNver}/OwO.min.css">`
             }
             if (path == "/hpp/admin/dash/docs_man") {
               hpp_docs_man_act = " active"
@@ -1032,14 +1033,14 @@ ${hpp_js}
               id: now["id"],
               content: now["content"],
             }
-            for(const i in hpp_talk){
-              if(hpp_talk[i].id===temp.id){
-                hpp_talk[i].content=temp.content
+            for (const i in hpp_talk) {
+              if (hpp_talk[i].id === temp.id) {
+                hpp_talk[i].content = temp.content
               }
             }
-    
+
             await KVNAME.put("hpp_talk_data", JSON.stringify(hpp_talk))
-    
+
             return new Response(200, {
               headers: {
                 "content-type": "application/json;charset=UTF-8",
@@ -1443,7 +1444,7 @@ login();
             data.content = hpp_talk[i]["content"]
             data.from = "Mango"
           } catch (e) { hpp_vi = null }
-          if (JSON.stringify(data) != "{}"&& hpp_vi != "False") {
+          if (JSON.stringify(data) != "{}" && hpp_vi != "False") {
             result.data.push(data)
           }
         }
