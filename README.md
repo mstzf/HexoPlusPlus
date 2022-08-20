@@ -1,18 +1,10 @@
-# 项目已停止维护
-
-此仓库将处于归档状态.不过,为什么不试试[Wexagonal](https://github.com/Wexagonal/Wexagonal)呢?**Wexa更快,支持的平台和数据库更多,并且有着更强大的功能.**
-
-
-
-
-
-
 # HexoPlusPlus
+## 维护目的
+原作者已经停止维护支持，我对其再度更新维护的目的是想要用自带的说说功能
+
 ## A powerful Hexo dashboard
 
-HexoPlusPlus~~也叫Hexo艹~~，是一个基于CloudFlareWorkers和CloudFlareKV技术的Hexo后端程序，目的是解决Hexo无后端带来的种种麻烦，支持但不限于Hexo等静态博客；利用CloudFlareWorkers当中间件，有效避免直接上传到Github易失败问题。
-
-**注意，HexoPlusPlus在使用前您的博客必须保证已完成集成部署**
+HexoPlusPlus~~也叫Hexo艹~~，是一个基于CloudFlareWorkers和CloudFlareKV技术的Hexo后端程序，目的是解决Hex**注意，HexoPlusPlus在使用前您的博客必须保证已完成集成部署**
 
 ## 特色
 
