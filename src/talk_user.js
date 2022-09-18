@@ -117,6 +117,6 @@ marked.setOptions({
 })
 rendererMD.image = function(href, title, text) {
     return `<a href="${href}" data-fancybox="gallery" data-caption="${text}" data-thumb="${href}">
-    <img style="object-fit: cover;width: 75%" src="${href}" alt="${text}" class="entered loaded" data-lazy-src="${href}" data-ll-status="loaded">
+    <img style="width:80%;object-fit: scale-down;" src="${href}" alt="${text}" class="entered loaded" data-lazy-src="${href}" data-ll-status="loaded">
     <\/a>`
 }
